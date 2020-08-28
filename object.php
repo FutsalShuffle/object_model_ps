@@ -34,28 +34,29 @@ class StudentsCore extends ObjectModel
     public function getAll()
     {
         $return = null;
-        $return &= Db::getInstance()->execute(
+        $return &= Db::getInstance()->executeS(
             "SELECT *
-            FROM `" . _DB_PREFIX_ . "students`"
-            );
+            FROM `" . _DB_PREFIX_ . "students` st
+            LEFT JOIN `" . _DB_PREFIX_ . "students_lang` AS st2 ON st.id_students = st2.id_students");
         return $return;
     }
 
     public function geBestScore()
     {
         $return = null;
-        $return &= Db::getInstance()->execute("SELECT `MAX(avg_score)` FROM `" . _DB_PREFIX_ . "students`");
+        $return &= Db::getInstance()->executeS("SELECT `MAX(avg_score)` FROM `" . _DB_PREFIX_ . "students`");
         return $return;
     }
 
     public function getBestStudent()
     {
         $return = null;
-        $return &= Db::getInstance()->execute("SELECT `*` FROM `" . _DB_PREFIX_ . "students` st
+        $return &= Db::getInstance()->executeS("SELECT `*` FROM `" . _DB_PREFIX_ . "students` st
         INNER JOIN (
             SELECT `id_student`, `MAX(avg_score)` FROM `" . _DB_PREFIX_ . "students`
             GROUP BY `id_students`
-            ) st2 ON `st.id_students` = `st2.id_students`");
+            ) st2 ON `st.id_students` = `st2.id_students`
+            LEFT JOIN `" . _DB_PREFIX_ . "students_lang` AS st3 ON `st2.id_students `= `st3.id_students`");
         return $return;
     }
 }
