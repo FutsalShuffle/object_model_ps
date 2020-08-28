@@ -41,17 +41,17 @@ class Students extends ObjectModel
         return $return;
     }
 
-    public function geBestScore()
+    public function getBestScore()
     {
         $return = null;
-        $return &= Db::getInstance()->executeS("SELECT `MAX(avg_score)` FROM `" . _DB_PREFIX_ . "students`");
+        $return &= Db::getInstance()->getValue("SELECT `MAX(avg_score)` FROM `" . _DB_PREFIX_ . "students`");
         return $return;
     }
 
     public function getBestStudent()
     {
         $return = null;
-        $return &= Db::getInstance()->executeS("SELECT `*` FROM `" . _DB_PREFIX_ . "students` st
+        $return &= Db::getInstance()->getValue("SELECT `*` FROM `" . _DB_PREFIX_ . "students` st
         INNER JOIN (
             SELECT `id_student`, `MAX(avg_score)` FROM `" . _DB_PREFIX_ . "students`
             GROUP BY `id_students`
