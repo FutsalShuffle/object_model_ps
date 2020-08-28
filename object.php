@@ -1,6 +1,6 @@
 <?php
 
-class StudentsCore extends ObjectModel
+class Students extends ObjectModel
 {
     public $id_students;
     public $name;
