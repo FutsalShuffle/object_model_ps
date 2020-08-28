@@ -5,7 +5,6 @@ class StudentsCore extends ObjectModel
     public $bday_date;
     public $is_studying = true;
     public $avg_score;
-    public $meta_name;
 
     public static $definition = array(
     'table' => 'students',
