@@ -28,7 +28,7 @@ class StudentsCore extends ObjectModel
         } else {
             $id = Context::getContext()->shop->id;
             $idShop = [$id ? $id : Configuration::get('PS_SHOP_DEFAULT')];
-        } 
+        }
     }
 
     public function getAll()
@@ -38,24 +38,24 @@ class StudentsCore extends ObjectModel
             "SELECT `*`
             FROM `' . _DB_PREFIX_ . 'students`"
             );
-        return $return;    
+        return $return;
     }
 
     public function geBestScore()
     {
         $return = null;
         $return &= Db::getInstance()->execute("SELECT `MAX(avg_score)` FROM `' . _DB_PREFIX_ . 'students`");
-        return $return;      
+        return $return;
     }
 
     public function getBestStudent()
     {
         $return = null;
-        $return &= Db::getInstance()->execute("SELECT `*` FROM `' . _DB_PREFIX_ . 'students` st 
+        $return &= Db::getInstance()->execute("SELECT `*` FROM `' . _DB_PREFIX_ . 'students` st
         INNER JOIN (
             SELECT `id_student`, MAX(avg_score) FROM `' . _DB_PREFIX_ . 'students`
             GROUP BY `id_students`
             ) st2 ON `st.id_students` = `st2.id_students`");
-        return $return;      
+        return $return;
     }
 }
